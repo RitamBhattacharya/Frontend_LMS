@@ -1,0 +1,77 @@
+.leave-details-container {
+    padding: 2rem;
+    background-color: #fce8e6;
+    height: 100vh;
+  }
+  
+  .details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .employee-badge {
+    background: #f9f287;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .status-badge.pending {
+    color: #000;
+  }
+  
+  .leave-details-card {
+    background-color: #d88d94;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 15px;
+  }
+  
+  .leave-details-card p {
+    margin-bottom: 1rem;
+  }
+  
+  .history-button {
+    background-color: #ffd700;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .approve-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .reject-button {
+    background-color: #f44336;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .remarks-section input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: none;
+  }
+  
