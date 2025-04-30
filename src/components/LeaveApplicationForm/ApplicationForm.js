@@ -2,25 +2,26 @@ import React, { useState, useEffect } from "react";
 import "../../styles/ApplicationForm.css";
 
 const ApplicationForm = () => {
-  const [employees, setEmployees] = useState([]);
-  const [selectedEmployeeId, setSelectedEmployeeId] = useState("");
+  const [employee, setEmployee] = useState(null);
   const [leaveType, setLeaveType] = useState("SICK");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [reason, setReason] = useState("");
 
   useEffect(() => {
-    // Fetch all employees to populate dropdown
-    fetch("http://localhost:8080/api/employees")
-      .then((res) => res.json())
-      .then((data) => setEmployees(data))
-      .catch((err) => console.error("Error fetching employees:", err));
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser) {
+      setEmployee(loggedInUser);
+    } else {
+      alert("No employee found. Please login.");
+      window.location.href = "/"; // Redirect to login
+    }
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedEmployeeId || !leaveType || !startDate || !endDate || !reason) {
+    if (!leaveType || !startDate || !endDate || !reason) {
       alert("Please fill all fields.");
       return;
     }
@@ -31,7 +32,7 @@ const ApplicationForm = () => {
       endDate,
       reason,
       status: "Pending",
-      employee: { employeeID: selectedEmployeeId }
+      employee: { employeeID: employee.employeeID }
     };
 
     try {
@@ -45,7 +46,6 @@ const ApplicationForm = () => {
 
       if (response.ok) {
         alert("Leave request submitted successfully.");
-        setSelectedEmployeeId("");
         setLeaveType("SICK");
         setStartDate("");
         setEndDate("");
@@ -60,24 +60,9 @@ const ApplicationForm = () => {
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "auto", padding: "20px" }}>
-      <h2>Leave Application Form</h2>
+    <div>
+      <br />
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Employee:</label>
-          <select
-            value={selectedEmployeeId}
-            onChange={(e) => setSelectedEmployeeId(e.target.value)}
-            required
-          >
-            <option value="">-- Select Employee --</option>
-            {employees.map((emp) => (
-              <option key={emp.employeeID} value={emp.employeeID}>
-                {emp.name} ({emp.employeeID})
-              </option>
-            ))}
-          </select>
-        </div>
 
         <div>
           <label>Leave Type:</label>
