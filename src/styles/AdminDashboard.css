@@ -128,3 +128,10 @@
     color: #7b5750;
   }
   
+  .navbar {
+    background-color: #d19d97;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
