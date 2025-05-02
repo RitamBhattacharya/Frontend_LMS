@@ -3,6 +3,7 @@ import "../../styles/LeaveHistory.css";
 import { FaUserCircle, FaArrowLeft, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar"; 
+import Navbar from "./Navbar";
 
 const LeaveHistory = () => {
   const [month, setMonth] = useState("June");
@@ -49,17 +50,13 @@ const LeaveHistory = () => {
     <div className="leave-history-container">
     <Sidebar />
 
-      <div className="main-content">
+    
         <div className="header">
+          <FaUserCircle size={30} />
           <h1>Leave History</h1>
-          <div className="user-info">
-            <FaUserCircle size={30} />
-            <div>
-              <p>Employee Name</p>
-              <p>abc@xyz.com</p>
-            </div>
-          </div>
+          <Navbar />
         </div>
+
 
         <div className="calendar-navigation">
           <button><FaArrowLeft /> Prev</button>
@@ -84,7 +81,6 @@ const LeaveHistory = () => {
           <p><span className="EL"></span> Earned Leave (EL)</p>
         </div>
       </div>
-    </div>
   );
 };
 

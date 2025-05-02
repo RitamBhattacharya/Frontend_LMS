@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../../styles/LeaveHistory.css";
-import { FaUserCircle, FaArrowLeft, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
+import { FaUserCircle, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Sidebar from "../LeaveApplicationForm/Sidebar"; // Make sure the path is correct
+import Navbar from "../LeaveApplicationForm/Navbar";
 
 const LeaveHistory = () => {
   const [month, setMonth] = useState("June");
@@ -13,13 +15,13 @@ const LeaveHistory = () => {
   };
 
   const getLeaveClass = (date) => {
-    const key = `2024-06-${date.toString().padStart(2, '0')}`;
+    const key = `2024-06-${date.toString().padStart(2, "0")}`;
     return leaveData[key] || "";
   };
 
   const renderCalendar = () => {
     const daysInMonth = 30;
-    const firstDay = new Date(year, 5, 1).getDay(); // 0 = Sunday, June = 5
+    const firstDay = new Date(year, 5, 1).getDay();
     const calendarCells = [];
 
     for (let i = 0; i < firstDay; i++) {
@@ -45,41 +47,56 @@ const LeaveHistory = () => {
 
   return (
     <div className="leave-history-container">
-   
+      <Sidebar />
 
       <div className="main-content">
-        <div className="header">
-          <h1>Leave History</h1>
-          <div className="user-info">
-            <FaUserCircle size={30} />
-            <div>
-              <p>Employee Name</p>
-              <p>abc@xyz.com</p>
-            </div>
-          </div>
-        </div>
+        {/* Top Bar */}
+              <Navbar />
 
+        {/* Title */}
+        <br/>
+        <h1 className="title">Leave History</h1>
+
+        {/* Calendar Navigation */}
         <div className="calendar-navigation">
-          <button><FaArrowLeft /> Prev</button>
-          <h2>{month.toUpperCase()} {year}</h2>
-          <button>Next <FaArrowRight /></button>
+          <button>
+            <FaArrowLeft /> Prev
+          </button>
+          <h2>
+            {month.toUpperCase()} {year}
+          </h2>
+          <button>
+            Next <FaArrowRight />
+          </button>
         </div>
 
+        {/* Calendar */}
         <table className="calendar">
           <thead>
             <tr>
-              <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
             </tr>
           </thead>
-          <tbody>
-            {renderCalendar()}
-          </tbody>
+          <tbody>{renderCalendar()}</tbody>
         </table>
 
+        {/* Legend */}
         <div className="legend">
-          <p><span className="SL"></span> Sick Leave (SL)</p>
-          <p><span className="CL"></span> Casual Leave (CL)</p>
-          <p><span className="EL"></span> Earned Leave (EL)</p>
+          <p>
+            <span className="SL"></span> Sick Leave (SL)
+          </p>
+          <p>
+            <span className="CL"></span> Casual Leave (CL)
+          </p>
+          <p>
+            <span className="EL"></span> Earned Leave (EL)
+          </p>
         </div>
       </div>
     </div>
