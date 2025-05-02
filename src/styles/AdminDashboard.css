@@ -51,15 +51,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-  }
-  
-  
-  .header {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
-  
+  }  
   
   .admin-info {
     display: flex;
@@ -128,10 +120,17 @@
     color: #7b5750;
   }
   
+  .header {
+    width: 100%;
+  }
+  
   .navbar {
     background-color: #d19d97;
     padding: 10px 20px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* aligns admin-info to the right */
     align-items: center;
+    width: 100%; /* make sure it spans full width of main-content */
   }
+  
+  

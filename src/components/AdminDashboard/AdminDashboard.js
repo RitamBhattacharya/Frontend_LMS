@@ -1,7 +1,6 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/AdminDashboard.css";
 import { useNavigate } from "react-router-dom";
-
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -39,6 +38,7 @@ const AdminDashboard = () => {
             )}
           </div>
         </header>
+
         <section className="dashboard-grid">
           <div className="card">
             <span className="icon">👥</span>
