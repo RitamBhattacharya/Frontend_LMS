@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../styles/LeaveDetails.css";
 
 const LeaveDetails = () => {
   const navigate = useNavigate();
   const { employeeId } = useParams(); // Example usage of dynamic route
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser) {
+      setUser(loggedInUser);
+    }
+  }, []);
 
   // Dummy data – replace with real API/data logic
   const leave = {
@@ -24,12 +32,18 @@ const LeaveDetails = () => {
         <div className="employee-badge">
           <span className="icon">👤</span>
           <div>
-            <p>
-              <strong>Name:</strong> Ratan Roy
-            </p>
-            <p>
-              <strong>Email:</strong> Ratan@gmail.com
-            </p>
+            {user ? (
+              <>
+                <p>
+                  <strong>{user.name}</strong>
+                </p>
+                <p>
+                  {user.email}
+                </p>
+              </>
+            ) : (
+              <p>Loading admin info...</p>
+            )}
             <p className={`status-badge ${leave.status.toLowerCase()}`}>
               {leave.status}
             </p>
@@ -69,10 +83,12 @@ const LeaveDetails = () => {
             ✔️ Approve
           </button>
 
-          <button className="reject-button"
+          <button
+            className="reject-button"
             onClick={() => navigate("/admin/leave/rejected")}
           >
-            🚫 Reject</button>
+            🚫 Reject
+          </button>
         </div>
 
         <div className="remarks-section">

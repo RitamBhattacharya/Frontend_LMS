@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/PendingRequests.css";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const pendingData = [
   { status: "" },
   { status: "" },
   { status: "" },
-  { status: "" }
+  { status: "" },
 ];
 
 const getStatusTag = (status) => {
@@ -27,23 +27,38 @@ const getStatusTag = (status) => {
 
 const PendingRequests = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser) {
+      setUser(loggedInUser);
+    }
+  }, []);
+
   return (
     <div className="pending-requests-container">
       <aside className="sidebar">
         <h2>Employee Leave Management</h2>
         <ul>
-        <li onClick={() => navigate("/admin-dashboard")}>Dashboard</li>
+          <li onClick={() => navigate("/admin-dashboard")}>Dashboard</li>
           <li className="active">Pending Requests</li>
         </ul>
       </aside>
       <main className="main-content">
         <header className="header">
-          <div className="admin-info">
-            <span className="admin-icon">👤</span>
-            <div>
-              <h4>Ratan Roy</h4>
-              <p>Ratan@gmail.com</p>
-            </div>
+          <div className="navbar">
+            {user ? (
+              <div className="admin-info">
+                <span className="admin-icon">👤</span>
+                <div>
+                  <h4>{user.name}</h4>
+                  <p>{user.email}</p>
+                </div>
+              </div>
+            ) : (
+              <p>Please log in to see the user details.</p>
+            )}
           </div>
         </header>
 
@@ -69,7 +84,9 @@ const PendingRequests = () => {
                   <td>{row.appliedOn || ""}</td>
                   <td>{getStatusTag(row.status)}</td>
                   <td>
-                  <button onClick={() => navigate(`/admin/leave/1`)}>View Details</button>
+                    <button onClick={() => navigate(`/admin/leave/1`)}>
+                      View Details
+                    </button>
                   </td>
                 </tr>
               ))}

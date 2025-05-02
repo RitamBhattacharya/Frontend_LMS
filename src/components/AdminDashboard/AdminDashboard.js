@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/AdminDashboard.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [stats, setStats] = useState({
+    employees: 0,
+    pending: 0,
+    approved: 0,
+    declined: 0,
+  });
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (loggedInUser) {
       setUser(loggedInUser);
     }
+
+    axios.get("http://localhost:8080/api/dashboard/stats")
+      .then(response => setStats(response.data))
+      .catch(error => console.error("Error fetching dashboard stats", error));
   }, []);
 
   return (
@@ -43,22 +54,22 @@ const AdminDashboard = () => {
           <div className="card">
             <span className="icon">👥</span>
             <h3>Registered Employees</h3>
-            <p>51</p>
+            <p>{stats.employees}</p>
           </div>
           <div className="card">
             <span className="icon">⏳</span>
             <h3>Pending Applications</h3>
-            <p>7</p>
+            <p>{stats.pending}</p>
           </div>
           <div className="card">
             <span className="icon">🚫</span>
             <h3>Declined Applications</h3>
-            <p>3</p>
+            <p>{stats.declined}</p>
           </div>
           <div className="card">
             <span className="icon">✔️</span>
             <h3>Approved Applications</h3>
-            <p>20</p>
+            <p>{stats.approved}</p>
           </div>
         </section>
       </main>
