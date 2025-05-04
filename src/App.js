@@ -22,7 +22,7 @@ function App() {
         <Route path="/leave-application" element={<LeaveApplicationForm />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/pending" element={<PendingRequests />} />
-        <Route path="/admin/leave/:employeeId" element={<LeaveDetails />} />
+        <Route path="/admin/leave/:requestId" element={<LeaveDetails />} />
         <Route path="/admin/leave-history" element={<LeaveHistory />} />
         <Route path="/admin/leave/approved" element={<ApprovedLeaveDetails />} />
         <Route path="/admin/leave/rejected" element={<RejectedLeaveDetails />} />
