@@ -107,7 +107,7 @@ const ApplicationForm = () => {
         </div>
 
         <div style={{ marginTop: "10px" }}>
-          <button type="submit">Submit Request</button>
+          <button type="submit" className="submit-btn">Submit Request</button>
         </div>
       </form>
     </div>

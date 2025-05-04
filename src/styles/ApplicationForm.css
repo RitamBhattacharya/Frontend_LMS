@@ -51,7 +51,7 @@ textarea {
   height: 90px;
 }
 
-button {
+.submit-btn {
   background-color: #7a4d4d;
   color: white;
   padding: 12px;
@@ -63,6 +63,6 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.submit-btn:hover {
   background-color: #5e3d3d;
 }

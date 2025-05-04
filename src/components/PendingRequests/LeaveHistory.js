@@ -55,7 +55,7 @@ const LeaveHistory = () => {
 
         {/* Title */}
         <br/>
-        <h1 className="title">Leave History</h1>
+        {/* <h1 className="title">Leave History</h1> */}
 
         {/* Calendar Navigation */}
         <div className="calendar-navigation">
