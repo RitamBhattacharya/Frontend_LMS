@@ -24,8 +24,8 @@ function App() {
         <Route path="/pending" element={<PendingRequests />} />
         <Route path="/admin/leave/:requestId" element={<LeaveDetails />} />
         <Route path="/admin/leave-history" element={<LeaveHistory />} />
-        <Route path="/admin/leave/approved" element={<ApprovedLeaveDetails />} />
-        <Route path="/admin/leave/rejected" element={<RejectedLeaveDetails />} />
+        <Route path="/admin/leave/approved/:requestId" element={<ApprovedLeaveDetails />} />
+        <Route path="/admin/leave/rejected/:requestId" element={<RejectedLeaveDetails />} />
         <Route path="/remaining" element={<RemainingLeaves />} />
         <Route path="/apply" element={<LeaveApplicationForm />} />
         <Route path="/history" element={<LeaveHistory />} />

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "../../styles/LeaveDetails.css"; // Reuse styling or create a new one if needed
+import axios from "axios";
+import "../../styles/LeaveDetails.css";
 
 const ApprovedLeaveDetails = () => {
-  const { employeeId } = useParams();
+  const { requestId } = useParams(); // use requestId from URL
   const [user, setUser] = useState(null);
+  const [leave, setLeave] = useState(null);
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -13,17 +15,20 @@ const ApprovedLeaveDetails = () => {
     }
   }, []);
 
-  // Dummy data for the approved leave — replace this with real data
-  const leave = {
-    name: "Ratan Roy",
-    email: "Ratan@gmail.com",
-    designation: "Software Engineer",
-    duration: "2025-04-10 to 2025-04-15",
-    type: "Sick Leave",
-    reason: "Medical Emergency",
-    status: "Approved",
-    remarks: "Take care and get well soon.",
-  };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/leave-requests/approved/${requestId}`)
+      .then((response) => {
+        setLeave(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching approved leave details:", error);
+      });
+  }, [requestId]);
+
+  if (!leave) return <p>Loading approved leave details...</p>;
+
+  const { employee } = leave;
 
   return (
     <div className="leave-details-container">
@@ -34,9 +39,7 @@ const ApprovedLeaveDetails = () => {
           <div>
             {user ? (
               <>
-                <p>
-                  <strong>{user.name}</strong>
-                </p>
+                <p><strong>{user.name}</strong></p>
                 <p>{user.email}</p>
               </>
             ) : (
@@ -50,21 +53,15 @@ const ApprovedLeaveDetails = () => {
       </header>
 
       <div className="leave-details-card">
+        <p><strong>Employee Name:</strong> {employee?.name || "—"}</p>
+        <p><strong>Designation:</strong> {employee?.designation || "—"}</p>
         <p>
-          <strong>Employee Name:</strong> {leave.name}
+          <strong>Duration of Leave:</strong>{" "}
+          {new Date(leave.startDate).toLocaleDateString()} to{" "}
+          {new Date(leave.endDate).toLocaleDateString()}
         </p>
-        <p>
-          <strong>Designation:</strong> {leave.designation}
-        </p>
-        <p>
-          <strong>Duration of Leave:</strong> {leave.duration}
-        </p>
-        <p>
-          <strong>Leave Type:</strong> {leave.type}
-        </p>
-        <p>
-          <strong>Reason:</strong> {leave.reason}
-        </p>
+        <p><strong>Leave Type:</strong> {leave.leaveType}</p>
+        <p><strong>Reason:</strong> {leave.reason}</p>
 
         <div className="action-buttons">
           <button className="approve-button approved" disabled>
@@ -73,12 +70,10 @@ const ApprovedLeaveDetails = () => {
         </div>
 
         <div className="remarks-section">
-          <label>
-            <strong>Remarks:</strong>
-          </label>
+          <label><strong>Remarks:</strong></label>
           <input
             type="text"
-            value={leave.remarks}
+            value={leave.adminComments || ""}
             readOnly
             className="remarks-readonly"
           />
