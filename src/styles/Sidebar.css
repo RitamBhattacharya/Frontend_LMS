@@ -1,4 +1,4 @@
-.sidebar {
+/* .sidebar {
   width: 20%;
   background-color: #7b5750;
   color: #fff;
@@ -22,6 +22,55 @@
   cursor: pointer;
 }
 
+.sidebar ul .active {
+  font-weight: bold;
+  text-decoration: underline;
+} */
+
+
+
+/* Ensure root layout supports full height */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 20%;
+  background-color: #7b5750;
+  color: #fff;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title styling */
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+/* Menu list styling */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Allows the list to fill the sidebar height if needed */
+}
+
+/* Menu item styling */
+.sidebar ul li {
+  margin: 15px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Highlight active menu item */
 .sidebar ul .active {
   font-weight: bold;
   text-decoration: underline;
