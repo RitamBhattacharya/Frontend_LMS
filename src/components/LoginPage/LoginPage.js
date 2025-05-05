@@ -265,8 +265,14 @@ const LoginPage = () => {
       );
 
       if (foundUser) {
-        // Save to localStorage
+        console.log("ID=", foundUser)
         localStorage.setItem("loggedInUser", JSON.stringify(foundUser));
+        
+        // Store ID only if Employee login
+        if (loginType === "Employee") {
+          console.log("ID=", foundUser.employeeID)
+          localStorage.setItem("loggedInUserId", foundUser.employeeID);
+        }
 
         const redirectPath =
           loginType === "Admin" ? "/admin-dashboard" : "/leave-application";
