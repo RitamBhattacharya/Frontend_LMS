@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useLocation } from "react-router-dom";
 import { FaUserCircle, FaCalendarAlt } from "react-icons/fa";
-import "../../styles/Sidebar.css"; // Optional: put your sidebar styles here
+import "../../styles/Sidebar.css"; 
 
 function Sidebar() {
   const location = useLocation();

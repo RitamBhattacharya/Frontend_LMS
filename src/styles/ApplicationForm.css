@@ -66,3 +66,61 @@ textarea {
 .submit-btn:hover {
   background-color: #5e3d3d;
 }
+
+.application-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Leave Rules Styling */
+.leave-rules {
+  background-color: #ffece7;
+  border-left: 6px solid #c94c4c;
+  padding: 25px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  color: #3b2f2f;
+  font-size: 0.96rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.leave-rules h3 {
+  margin-top: 0;
+  color: #7a4d4d;
+}
+
+.leave-rules ul {
+  padding-left: 20px;
+}
+
+.leave-rules li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* Form Styling */
+form {
+  background-color: #f6cfc7;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .application-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
